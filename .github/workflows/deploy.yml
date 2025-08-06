@@ -1,0 +1,43 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - main # The branch you want to trigger the workflow
+
+jobs:
+  # This is the first job that runs automatically.
+  # It can be used for building, testing, etc.
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run tests
+        run: |
+          echo "Running tests..."
+          # Replace with your actual test commands
+          
+      - name: Build application
+        run: |
+          echo "Building the application..."
+          # Replace with your actual build commands
+
+  # This is the second job that requires manual approval.
+  # It depends on the 'build' job completing successfully.
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build # This ensures the 'build' job runs and passes first.
+    environment: production # This links the job to the environment you created.
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to server
+        run: |
+          echo "Deployment to production is approved and starting..."
+          # Replace with your actual deployment commands, e.g., SSH, Docker, etc.
+          # For example:
+          # scp -r ./dist user@server:/var/www/html/
