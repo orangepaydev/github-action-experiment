@@ -39,5 +39,3 @@ The workflow is triggered on every push to the `main` branch and consists of thr
 ---
 
 For more details, see the [deploy.yml](.github/workflows/deploy.yml) file.
-
-check
