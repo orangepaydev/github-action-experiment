@@ -1,15 +1,19 @@
 name: Deploy to Production
 
+
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
-    types: [closed] # Only trigger when PR is closed (merged or not)
 
 jobs:
   # This is the first job that runs automatically.
   # It can be used for building, testing, etc.
   build:
+    if: ${{ github.event.review.state == 'approved' }} # Only run if the review is approved.
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
