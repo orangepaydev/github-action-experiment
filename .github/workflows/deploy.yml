@@ -2,12 +2,10 @@ name: Deploy to Production
 
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
+    types: [closed] # Only trigger when PR is closed (merged or not)
 
 jobs:
   # This is the first job that runs automatically.
