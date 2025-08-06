@@ -26,10 +26,26 @@ jobs:
 
   # This is the second job that requires manual approval.
   # It depends on the 'build' job completing successfully.
-  deploy:
+  deploy-uat:
     runs-on: ubuntu-latest
     needs: build # This ensures the 'build' job runs and passes first.
     environment: uat # This links the job to the environment you created.
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to server
+        run: |
+          echo "Deployment to uat is approved and starting..."
+          # Replace with your actual deployment commands, e.g., SSH, Docker, etc.
+          # For example:
+          # scp -r ./dist user@server:/var/www/html/
+
+  deploy-production:
+    runs-on: ubuntu-latest
+    needs: deploy-uat # This ensures the 'build' job runs and passes first.
+    environment: production # This links the job to the environment you created.
     
     steps:
       - name: Checkout code
