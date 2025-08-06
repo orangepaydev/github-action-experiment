@@ -1,9 +1,10 @@
 name: Deploy to Production
 
 on:
-  push:
+  pull_request:
     branches:
-      - main # The branch you want to trigger the workflow
+      - main
+    types: [closed] # Only trigger when PR is closed (merged or not)
 
 jobs:
   # This is the first job that runs automatically.
