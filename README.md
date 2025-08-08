@@ -39,3 +39,15 @@ The workflow is triggered on every push to the `main` branch and consists of thr
 ---
 
 For more details, see the [deploy.yml](.github/workflows/deploy.yml) file.
+
+## Permission Required for Pushing to uat/production Branches
+
+To allow the workflow to push commits from `main` to the `uat` or `production` branches, the workflow must have sufficient permissions to write to these branches. By default, GitHub Actions uses the `GITHUB_TOKEN` with the following permissions:
+
+- **contents: write** — Required to push commits to branches.
+- **actions: write** — Required if the workflow triggers other workflows.
+
+You may need to update your repository or workflow settings to ensure the `GITHUB_TOKEN` has `write` access to repository contents. For more details, see the [GitHub Actions permissions documentation](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token).
+
+![Workflow Action Permission Required](assets/workflow-action-permission-required.png)
+
