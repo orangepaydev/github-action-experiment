@@ -26,7 +26,6 @@ jobs:
         run: |
           echo "Building the application..."
           # Replace with your actual build commands
-
   # This is the second job that requires manual approval.
   # It depends on the 'build' job completing successfully.
   deploy-uat:
@@ -60,3 +59,11 @@ jobs:
           # Replace with your actual deployment commands, e.g., SSH, Docker, etc.
           # For example:
           # scp -r ./dist user@server:/var/www/html/
+
+      - name: Push main commit to uat branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git push origin HEAD:uat
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
