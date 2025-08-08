@@ -44,6 +44,14 @@ jobs:
           # For example:
           # scp -r ./dist user@server:/var/www/html/
 
+      - name: Push main commit to uat branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git push origin HEAD:uat
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   deploy-production:
     runs-on: ubuntu-latest
     needs: deploy-uat # This ensures the 'build' job runs and passes first.
@@ -60,10 +68,10 @@ jobs:
           # For example:
           # scp -r ./dist user@server:/var/www/html/
 
-      - name: Push main commit to uat branch
+      - name: Push main commit to production branch
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git push origin HEAD:uat
+          git push origin HEAD:production
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
